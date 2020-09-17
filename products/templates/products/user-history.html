@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class='row'>
+		<div class='col-12 my-3'>
+			<h1>Histórico de Produtos</h1>
+			<hr/>
+		</div>
+		{% for obj in object_list %}
+		<div class='col'>
+			{% include 'products/snippets/card-history.html' with instance=obj.content_object %}
+		</div>
+		{% endfor %}
+	</div>
+{% endblock %}

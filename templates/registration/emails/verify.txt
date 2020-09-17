@@ -1,0 +1,13 @@
+Bem vindo,
+
+Por favor ative a sua conta para o email {{ email }} clicando no link que se segue:
+
+
+{{ path }}
+
+
+Após ativar a conta pode fazer o login!
+
+Obrigado,
+
+TemTudo

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+		<div class='text-center my-5 p-3 mb-2 bg-dark text-white'>
+			<h1>Conta</h1>
+		</div>
+	<div class='row'>
+		<div class='col-12 col-md-3 my-3'>
+			<div class="card">
+			  <div class="card-body">
+			    <h5 class="card-title text-center p-3 mb-2 bg-warning text-dark">Apoio</h5>
+			    <div class='list-group'>
+			    	<a class='list-group-item text-center p-3 mb-2 bg-secondary text-white' href='{% url "about" %}'>Sobre</a>
+			    	<a class='list-group-item text-center p-3 mb-2 bg-secondary text-white' href='{% url "contact" %}'>Contato</a>
+			    </div>
+			  </div>
+			</div>
+		</div>
+
+		<div class='col-12 col-md-3 my-3'>
+			<div class="card">
+			  <div class="card-body">
+			    <h5 class="card-title text-center p-3 mb-2 bg-warning text-dark">Faturação</h5>
+			    <div class='list-group'>
+			    	<a class='list-group-item text-center p-3 mb-2 bg-secondary text-white' href='{% url "orders:list" %}'>Encomendas</a>
+			    	<a class='list-group-item text-center p-3 mb-2 bg-secondary text-white' href='{% url "billing-payment-method" %}'>Métodos de Pagamento</a>
+			    </div>
+			  </div>
+			</div>
+		</div>
+
+		<div class='col-12 col-md-3 my-3'>
+			<div class="card">
+			  <div class="card-body">
+			    <h5 class="card-title text-center p-3 mb-2 bg-warning text-dark">Informação da Conta</h5>
+			    <div class='list-group'>
+			    	<a class='list-group-item text-center p-3 mb-2 bg-secondary text-white' href='{% url "password_change" %}'>Alterar Password</a>
+			    </div>
+			  </div>
+			</div>
+		</div>
+
+		<div class='col-12 col-md-3 my-3'>
+			<div class="card">
+			  <div class="card-body">
+			    <h5 class="card-title text-center p-3 mb-2 bg-warning text-dark">Subscrição de Notificações</h5>
+			    <div class='list-group'>
+			    	<a class='list-group-item text-center p-3 mb-2 bg-secondary text-white' href='{% url "marketing-pref" %}'>Email Marketing</a>
+			    </div>
+			  </div>
+			</div>
+		</div>
+
+		<div class='col-12 col-md-3 my-3'>
+			<div class="card">
+			  <div class="card-body">
+			    <h5 class="card-title text-center p-3 mb-2 bg-warning text-dark">Histórico</h5>
+			    <div class='list-group'>
+			    	<a class='list-group-item text-center p-3 mb-2 bg-secondary text-white' href='{% url "account:user-product-history" %}'>Produtos</a>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

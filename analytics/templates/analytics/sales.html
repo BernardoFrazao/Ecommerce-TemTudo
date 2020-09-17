@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class='row'>
+	<div class='col-12'>
+		<h1>Dados das Vendas</h1>
+		<hr/>
+	</div>
+</div>
+
+
+<div class='row'>
+	<div class='col'>
+		<p>Recentes total: {{ recent_orders_total }} €</p>
+		<ol>
+		{% for order in recent_orders %}
+			<li>{{ order.order_id }}
+			{{ order.total }}
+			{{ order.updated }}</li>
+		{% endfor %}
+		</ol>
+	</div>
+
+	<div class='col'>
+		<p>Enviadas</p>
+		<ol>
+		{% for order in shipped_orders %}
+			<li>{{ order.order_id }}
+			{{ order.total }}
+			{{ order.updated }}</li>
+		{% endfor %}
+		</ol>
+	</div>
+	<div class='col'>
+		<p>Pagas</p>
+		<ol>
+		{% for order in paid_orders %}
+			<li>{{ order.order_id }}
+			{{ order.total }}
+			{{ order.updated }}</li>
+		{% endfor %}
+		</ol>
+	</div>
+</div>
+{% endblock %}

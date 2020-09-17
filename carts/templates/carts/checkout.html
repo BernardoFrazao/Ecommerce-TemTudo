@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% if not billing_profile %}
+		<div class='row text-center'>
+			<div class='col-12 col-md-6'>
+				<h4 class='my-3'>Iniciar Sessão</h4>
+				{% include 'accounts/snippets/form.html' with form=login_form next_url=request.build_absolute_uri %}
+			</div>
+			<div class='col-12 col-md-6'>
+				<h4 class='my-3'>Continuar como convidado</h4>
+				{% url "guest_register" as guest_register_url %}
+				{% include 'accounts/snippets/form.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url %}
+			</div>
+		</div>
+
+	{% else %}
+		{% if not object.shipping_address %}
+			<div class='row'>
+				<div class='col-12'>
+					<h1 class='my-4'>Endereço de Envio</h1>
+					<hr/>
+				</div>
+				<div class='col-6'>
+					{% url "checkout_address_create" as checkout_address_create %}
+					{% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create address_type='shipping' %}
+				</div>
+				<div class='col-6'>
+					{% url "checkout_address_reuse" as checkout_address_reuse %}
+					{% include 'addresses/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_url=checkout_address_reuse %}
+				</div>
+			</div>
+		{% elif not object.billing_address %}
+			<div class='row'>
+				<div class='col-12'>
+					<h1 class='my-4'>Endereço de Faturação</h1>
+					<hr/>
+				</div>
+				<div class='col-6'>
+					{% url "checkout_address_create" as checkout_address_create %}
+					{% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create address_type='billing' %}
+				</div>
+				<div class='col-6'>
+					{% url "checkout_address_reuse" as checkout_address_reuse %}
+					{% include 'addresses/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_url=checkout_address_reuse %}
+				</div>
+			</div>
+		{% else %}	
+			{% if not has_card %}
+				<div class='stripe-payment-form' data-token='{{ publish_key }}' data-next-url='{{ request.build_absolute_uri }}' data-btn-title='Adicionar método de pagamento'></div>
+			{% else %}
+				<h1>Finalizar Encomenda</h1>
+				<p>Itens do carrinho: {% for product in object.cart.products.all %}{{ product }} {% if not forloop.last %}, {% endif %}{% endfor %}</p>
+				<p>Endereço de envio: {{ object.shipping_address.get_address }}</p>
+				<p>Endereço de faturação: {{ object.shipping_address.get_address }}</p>
+				<p>Método de Pagamento: {{ billing_profile.default_card }} (<a href='{{ billing_profile.get_payment_method_url }}?next={{ request.build_absolute_uri }}'>Trocar</a>)</p>
+				<p>Total do Carrinho: {{ object.cart.total }} €</p>
+				<p>Total do Envio: {{ object.shipping_total }} €</p>
+				<p>Total da Encomenda: {{ object.total }} €</p>
+				<form class='form' method='POST' action=''>{% csrf_token %}
+					<button type='submit' class='btn btn-warning'>Finalizar</button>
+				</form>
+			{% endif %}
+		{% endif %}
+	{% endif %}
+{% endblock %}

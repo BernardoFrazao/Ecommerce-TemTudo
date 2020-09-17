@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- form do stripe -->
+<div class='col-10 col-md-6 mx-auto'>
+	<h2>Adicionar método de pagamento</h2>
+	<div class='stripe-payment-form' data-token='{{ publish_key }}' data-next-url='{% if next_url %}{{ next_url }}{% endif %}' data-btn-title='Adicionar método de pagamento'></div>
+</div>
+{% endblock %}

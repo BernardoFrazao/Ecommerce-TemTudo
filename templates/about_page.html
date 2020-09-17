@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class='text-center my-5 p-3 mb-2 bg-dark text-white'>
+	<h1>Sobre Nós</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 my-5 text-center">
+      <p>A TT (TEM TUDO)é uma empresa de Web-commerce<br/> com sede em Lisboa - Portugal.<br/>
+		A empresa foi fundada em 2020 por Bernardo Frazão,<br/> Edurado Herlander e Pedro Cabral.<br/>
+		A empresa oferece diversos produtos no seu site que<br/> é um grande catálogo de produtos.<br/></p>
+    </div>
+    <div class="col-sm-6 text-center">
+      <img src="https://temtudo-ecommerce.s3-us-west-2.amazonaws.com/static/img/Logo+PNG.png" width="270" height="270">
+    </div>
+</div>
+
+<div class='row'>
+	{% for obj in object_list %}
+	<div class='col'>
+		{% include 'products/snippets/card.html' with instance=obj %}
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
